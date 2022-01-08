@@ -1,5 +1,7 @@
 package week2.day1;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,6 +54,23 @@ public class CreateLead {
 			
 			//int size = dd.getOptions().size();
 			//dd.deselectByIndex(size-2); //selects 2nd last element from drop down
+		
+		//Select country dropdown value that starts with E but the second match
+		WebElement countrydropdown = driver.findElement(By.id("createLeadForm_generalCountryGeoId"));
+		Select countrydd = new Select(countrydropdown);
+		int count = 0;
+		List<WebElement> countryList = countrydd.getOptions();
+		for(WebElement i:countryList) {
+			if(i.getText().startsWith("E")) {
+				count++;
+				if(count==2) {
+					System.out.println("Selected country is "+i.getText());
+					i.click();
+					break;
+				}
+			}
+		}
+		
 		
 		driver.findElement(By.className("smallSubmit")).click();
 		
